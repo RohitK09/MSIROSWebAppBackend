@@ -1,13 +1,15 @@
 package com.spring.model;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 /*
  * Models the Incident class
  * 
  */
+
 public class Incident {
 	private int INCIDENTID;
-	private Date INCIDENTDATE;
+	private Timestamp INCIDENTDATE;
 	private double LONGITUDE;
 	private double LATITUDE;
 	private String  LOCATIONNAME;
@@ -26,13 +28,13 @@ public class Incident {
 	/**
 	 * @return the iNCIDENTDATE
 	 */
-	public Date getINCIDENTDATE() {
+	public Timestamp getINCIDENTDATE() {
 		return INCIDENTDATE;
 	}
 	/**
 	 * @param iNCIDENTDATE the iNCIDENTDATE to set
 	 */
-	public void setINCIDENTDATE(Date iNCIDENTDATE) {
+	public void setINCIDENTDATE(Timestamp iNCIDENTDATE) {
 		INCIDENTDATE = iNCIDENTDATE;
 	}
 	/**

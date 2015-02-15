@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.MediaType;
 import org.springframework.ui.ModelMap;
@@ -18,21 +19,36 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spring.dao.HospitalDAO;
 import com.spring.model.Hospital;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class HospitalRestController.
+ *
+ * @author Rohit Katyal
+ * @since 31st Decemeber 2014
+ * @description :Controller for Hospital requests
+ */
 @ComponentScan
 @RestController
 @RequestMapping("/Hospital")
 public class HospitalRestController {
 	
+		/** The Json data. */
 		String JsonData ;
+		
+		/** The Hospital dao. */
 		@Autowired
 		private HospitalDAO HospitalDAO;
 
-		@RequestMapping(value = "/hello", method = RequestMethod.GET)
-		public @ResponseBody String getAllUsers(ModelMap model) {
-			String jsonData = "[{\"id\":\"3253123\",\"firstname\":\"Chris\",\"lastname\":\"Johnson\",\"address\":\"211, Geoffrey Drive\",\"city\":\"Newark\",\"phone\":\"999-888-6666\",\"email\":\"chrisj@yahoo.com\"},{\"id\":\"67643837\",\"firstname\":\"Bill\",\"lastname\":\"Derkson\",\"address\":\"201, Sleepy Hollow Drive\",\"city\":\"Newark\",\"phone\":\"999-777-2222\",\"email\":\"billd@gmail.com\"}]";
-			return jsonData;
-		}
-		
+
+	
+		/**
+		 * Gets the hospital providers.
+		 *
+		 * @param model the model
+		 * @param hospitalId the hospital id
+		 * @return the hospital providers
+		 */
+		@Cacheable
 		@RequestMapping(value = "/{hospitalId}" , method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 		public @ResponseBody String getHospitalProviders(ModelMap model,
 				@PathVariable("hospitalId") String hospitalId) {
@@ -50,10 +66,19 @@ public class HospitalRestController {
 			
 			return jsonData;
 		}
+		
+		/**
+		 * Sets the hospital providers.
+		 *
+		 * @param model the model
+		 * @param Id the id
+		 * @param numberOfBeds the number of beds
+		 * @return the string
+		 */
 		@RequestMapping(value = "/update" , method = RequestMethod.POST)
 		public @ResponseBody String setHospitalProviders(ModelMap model,
 				@RequestParam("HospitalId") String Id,@RequestParam("numberOfBeds") String numberOfBeds ) {
-			String jsonData = "Not A User" ;
+			
 			System.out.println(Id);
 			Hospital hospital = HospitalDAO.getById(Id);
 			hospital.setNumberOfBeds(Integer.parseInt(numberOfBeds));

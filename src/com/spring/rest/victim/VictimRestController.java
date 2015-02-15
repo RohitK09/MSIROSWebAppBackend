@@ -19,7 +19,9 @@ import com.spring.dao.victim.VictimCountDAO;
 import com.spring.dao.victim.VictimDAO;
 import com.spring.model.VictimCount;
 import com.spring.model.VictimStatus;
-
+/*
+ * Controller for 
+ */
 @ComponentScan
 @RestController
 @RequestMapping("/Victim")
@@ -28,7 +30,7 @@ public class VictimRestController {
 	String JsonData;
 	@Autowired
 	private VictimCountDAO VictimDAO;
-
+	
 	@RequestMapping(value = "/getAllTypesOfVictims", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody String getAllTypesOfAmbulance(ModelMap model) {
 		String jsonData = "Not A User";

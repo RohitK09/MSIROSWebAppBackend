@@ -5,6 +5,7 @@ import java.util.List;
 import com.spring.model.Incident;
 
 public interface  IncidentDAO {
+	//Save
 	public void save(Incident incident);
     //Read
     public Incident getById(int id);

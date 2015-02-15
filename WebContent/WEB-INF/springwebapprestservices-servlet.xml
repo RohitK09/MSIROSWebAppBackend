@@ -21,8 +21,8 @@ http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 	 <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
  		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
         <property name="url" value="jdbc:oracle:thin:@aos.acsu.buffalo.edu:1521/aos.buffalo.edu" />
-        <property name="username" value="mehulraj" />
-        <property name="password" value="mgs618f3s" />
+        <property name="username" value="######" />
+        <property name="password" value="######" />
     </bean>
     
     <bean id="ambulanceDAO" class="com.spring.dao.AmbulanceDAOImpl">

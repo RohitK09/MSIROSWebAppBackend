@@ -2,7 +2,8 @@ package com.spring.rest.hospital;
 
 import java.io.IOException;
 import java.util.List;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.ComponentScan;
@@ -19,6 +20,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spring.dao.HospitalDAO;
 import com.spring.model.Hospital;
 
+
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class HospitalRestController.
@@ -31,7 +34,9 @@ import com.spring.model.Hospital;
 @RestController
 @RequestMapping("/Hospital")
 public class HospitalRestController {
-	
+	 final static Logger log = LoggerFactory.getLogger(HospitalRestController.class);
+
+	  
 		/** The Json data. */
 		String JsonData ;
 		
@@ -52,13 +57,15 @@ public class HospitalRestController {
 		@RequestMapping(value = "/{hospitalId}" , method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 		public @ResponseBody String getHospitalProviders(ModelMap model,
 				@PathVariable("hospitalId") String hospitalId) {
+			 
 			String jsonData = "Not A User" ;
-			System.out.println("inside");
 			Hospital hospital = HospitalDAO.getById(hospitalId);
 			ObjectMapper objmapper = new ObjectMapper();
 			try {
+				 
 				 jsonData = objmapper.writeValueAsString(hospital);
-				 System.out.println(objmapper.writeValueAsString(hospital));
+				 //System.out.println(objmapper.writeValueAsString(hospital));
+				 
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -83,7 +90,9 @@ public class HospitalRestController {
 			Hospital hospital = HospitalDAO.getById(Id);
 			hospital.setNumberOfBeds(Integer.parseInt(numberOfBeds));
 			HospitalDAO.update(hospital);
+			log.info("Upadating Hospital Beds Update:numberOfBeds"+numberOfBeds);
 			return "Success";
+			
 		}
 	}
 

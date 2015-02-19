@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<!-- Send debug messages to database -->
+	<appender name="MYSQL" class="ch.qos.logback.classic.db.DBAppender">
+        <connectionSource class="ch.qos.logback.core.db.DriverManagerConnectionSource">
+            <driverClass>com.mysql.jdbc.Driver</driverClass>
+            <url>jdbc:mysql://msirosdbloggerinstance.capedul0eorc.us-east-1.rds.amazonaws.com:3306/msirosdbLogger</url>
+            <user>admin</user>
+            <password>Hello123</password>
+        </connectionSource>
+        <sqlDialect class="ch.qos.logback.core.db.dialect.MySQLDialect" />
+    </appender>
+
+	<!-- By default, the level of the root level is set to DEBUG -->
+	<root level="INFO">
+		<appender-ref ref="MYSQL" />
+	</root>
+</configuration>

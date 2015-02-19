@@ -87,6 +87,7 @@ public class AmbulanceRestController {
 			ambulanceCounts.setAmbulanceType("Type I");
 			ambDAO.update(ambulanceCounts);
 			
+			
 		}
 		if(intermediate!=null)
 		{
@@ -102,11 +103,9 @@ public class AmbulanceRestController {
 		}
 		
 		
-		//ambulanceDAO.save(ambulance);
-		return "hello";
-		//return new ObjectMapper().writeValueAsString(ambulance);
-		//failure 
-		//return "-1";
+		
+		return "Success";
+		
 }
 	//check in the vehicles and update the number of vehicle and their types
 		@RequestMapping(value = "do/vehicleCheckIn" , method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
@@ -132,6 +131,14 @@ public class AmbulanceRestController {
 			//failure 
 			return "-1";
 	}
+	
+	/**
+	 * Gets the ambulance providers.
+	 *
+	 * @param model 
+	 * @param ProviderName the provider name
+	 * @return the ambulance provider
+	 */
 	@RequestMapping(value = "/{providername}" , method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody String getAmbulanceProviders(ModelMap model,
 			@PathVariable("providername") String ProviderName) {

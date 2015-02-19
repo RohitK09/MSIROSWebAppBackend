@@ -9,7 +9,13 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 
-
+/*
+ * @author: Rohit Katyal
+ * @description A simple Implementation for 
+ * relaxing the same-origin policy, 
+ * allowing Javascript on a web page to 
+ * consume a REST API served from a different origin
+ */
 public class SimpleCORSFilter implements Filter {
 
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {

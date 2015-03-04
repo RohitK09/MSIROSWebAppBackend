@@ -38,7 +38,7 @@ public class AmbulanceCountsDAOImpl implements AmbulanceCountsDAO {
 		String insertStmt = "INSERT INTO AMBULANCECOUNTS VALUES(?,?,?) ";
 		Object[] params = new Object[] { ambulancecounts.getProviderId(),
 				ambulancecounts.getAmbulanceType() };
-		int[] types = new int[] { Types.NUMERIC,Types.VARCHAR,Types.NUMERIC };
+	
 		try {
 			noOfAmbulances = (Integer) jdbcTemplate.queryForObject(selectStmt,
 					params, Integer.class);
@@ -48,7 +48,7 @@ public class AmbulanceCountsDAOImpl implements AmbulanceCountsDAO {
 			Object[] params_a= new Object[] { ambulancecounts.getProviderId(),
 					ambulancecounts.getAmbulanceType(),ambulancecounts.getNumberOfAmbulance() };
 			//System.out.println((String[])params_a);
-			jdbcTemplate.update(insertStmt, params_a, types);
+			jdbcTemplate.update(insertStmt, params_a);
 			return ambulancecounts;
 		}
 		// SQL statement to update the no of count if

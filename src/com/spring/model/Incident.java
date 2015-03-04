@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 
 public class Incident {
 	private int INCIDENTID;
-	private Timestamp INCIDENTDATE;
+	private String INCIDENTDATE;
 	private double LONGITUDE;
 	private double LATITUDE;
 	private String  LOCATIONNAME;
@@ -28,13 +28,13 @@ public class Incident {
 	/**
 	 * @return the iNCIDENTDATE
 	 */
-	public Timestamp getINCIDENTDATE() {
+	public String getINCIDENTDATE() {
 		return INCIDENTDATE;
 	}
 	/**
 	 * @param iNCIDENTDATE the iNCIDENTDATE to set
 	 */
-	public void setINCIDENTDATE(Timestamp iNCIDENTDATE) {
+	public void setINCIDENTDATE(String iNCIDENTDATE) {
 		INCIDENTDATE = iNCIDENTDATE;
 	}
 	/**

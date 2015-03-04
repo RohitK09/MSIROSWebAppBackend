@@ -24,9 +24,8 @@ http://www.springframework.org/schema/context/spring-context-4.0.xsd">
         <property name="username" value="mehulraj" />
         <property name="password" value="mgs618f3s" />
     </bean>
-    
-    <bean id="ambulanceDAO" class="com.spring.dao.AmbulanceDAOImpl">
-        <property name="dataSource" ref="dataSource" />
+     <bean id="ambulanceDAO" class="com.spring.dao.AmbulanceDAOImpl">
     </bean>
+   
    
 </beans>

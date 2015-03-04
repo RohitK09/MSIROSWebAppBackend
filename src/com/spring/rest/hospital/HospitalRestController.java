@@ -20,8 +20,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spring.dao.HospitalDAO;
 import com.spring.model.Hospital;
 
-
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class HospitalRestController.
@@ -34,65 +32,68 @@ import com.spring.model.Hospital;
 @RestController
 @RequestMapping("/Hospital")
 public class HospitalRestController {
-	 final static Logger log = LoggerFactory.getLogger(HospitalRestController.class);
+	final static Logger log = LoggerFactory
+			.getLogger(HospitalRestController.class);
 
-	  
-		/** The Json data. */
-		String JsonData ;
-		
-		/** The Hospital dao. */
-		@Autowired
-		private HospitalDAO HospitalDAO;
+	/** The Json data. */
+	String JsonData;
 
+	/** The Hospital dao. */
+	@Autowired
+	private HospitalDAO HospitalDAO;
 
-	
-		/**
-		 * Gets the hospital providers.
-		 *
-		 * @param model the model
-		 * @param hospitalId the hospital id
-		 * @return the hospital providers
-		 */
-		@Cacheable
-		@RequestMapping(value = "/{hospitalId}" , method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
-		public @ResponseBody String getHospitalProviders(ModelMap model,
-				@PathVariable("hospitalId") String hospitalId) {
-			 
-			String jsonData = "Not A User" ;
-			Hospital hospital = HospitalDAO.getById(hospitalId);
-			ObjectMapper objmapper = new ObjectMapper();
-			try {
-				 
-				 jsonData = objmapper.writeValueAsString(hospital);
-				 //System.out.println(objmapper.writeValueAsString(hospital));
-				 
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			return jsonData;
+	/**
+	 * Gets the hospital providers.
+	 *
+	 * @param model
+	 *            the model
+	 * @param hospitalId
+	 *            the hospital id
+	 * @return the hospital providers
+	 */
+	@Cacheable
+	@RequestMapping(value = "/{hospitalId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody String getHospitalProviders(ModelMap model,
+			@PathVariable("hospitalId") String hospitalId) {
+
+		String jsonData = "Not A User";
+		Hospital hospital = HospitalDAO.getById(hospitalId);
+		ObjectMapper objmapper = new ObjectMapper();
+		try {
+
+			jsonData = objmapper.writeValueAsString(hospital);
+			// System.out.println(objmapper.writeValueAsString(hospital));
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		
-		/**
-		 * Sets the hospital providers.
-		 *
-		 * @param model the model
-		 * @param Id the id
-		 * @param numberOfBeds the number of beds
-		 * @return the string
-		 */
-		@RequestMapping(value = "/update" , method = RequestMethod.POST)
-		public @ResponseBody String setHospitalProviders(ModelMap model,
-				@RequestParam("HospitalId") String Id,@RequestParam("numberOfBeds") String numberOfBeds ) {
-			
-			System.out.println(Id);
-			Hospital hospital = HospitalDAO.getById(Id);
-			hospital.setNumberOfBeds(Integer.parseInt(numberOfBeds));
-			HospitalDAO.update(hospital);
-			log.info("Upadating Hospital Beds Update:numberOfBeds"+numberOfBeds);
-			return "Success";
-			
-		}
+
+		return jsonData;
 	}
 
+	/**
+	 * Sets the hospital providers.
+	 *
+	 * @param model
+	 *            the model
+	 * @param Id
+	 *            the id
+	 * @param numberOfBeds
+	 *    the number of beds to update 
+	 * @return the string
+	 */
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public @ResponseBody String setHospitalProviders(ModelMap model,
+			@RequestParam("HospitalId") String Id,
+			@RequestParam("numberOfBeds") String numberOfBeds) {
+
+		System.out.println(Id);
+		Hospital hospital = HospitalDAO.getById(Id);
+		hospital.setNumberOfBeds(Integer.parseInt(numberOfBeds));
+		HospitalDAO.update(hospital);
+		log.info("Upadating Hospital Beds Update:numberOfBeds" + numberOfBeds);
+		return "Success";
+
+	}
+}

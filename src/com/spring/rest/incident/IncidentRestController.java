@@ -35,8 +35,8 @@ public class IncidentRestController {
 			@RequestParam("dateTxt") String date) {
 		// incident.getINCIDENTDATE();
 		Incident incident = new Incident();
-		System.out.println(date);
-		incident.setINCIDENTDATE(Timestamp.valueOf(date));
+		//System.out.println(Timestamp.valueOf(date));
+		incident.setINCIDENTDATE(date);
 		incident.setLATITUDE(Double.valueOf(latitude));
 		incident.setLONGITUDE(Double.valueOf(longitude));
 		incident.setLOCATIONNAME(locationName);

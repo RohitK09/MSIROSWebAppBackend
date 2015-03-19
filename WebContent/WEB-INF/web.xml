@@ -16,6 +16,7 @@
         </servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    
     <servlet-mapping>
         <servlet-name>springwebapprestservices</servlet-name>
         <url-pattern>*.html</url-pattern>

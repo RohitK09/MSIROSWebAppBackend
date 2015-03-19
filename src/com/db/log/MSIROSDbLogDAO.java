@@ -1,4 +1,4 @@
-package com.spring.dao;
+package com.db.log;
 
 import java.util.List;
 

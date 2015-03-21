@@ -23,7 +23,7 @@ import com.spring.dao.victim.VictimDAO;
 import com.spring.model.VictimCount;
 import com.spring.model.VictimStatus;
 /*
- * Controller for 
+ * Controller for Victim  
  */
 @ComponentScan
 @RestController
@@ -33,13 +33,14 @@ public class VictimRestController {
 	String JsonData;
 	@Autowired
 	private VictimCountDAO VictimDAO;
-	
+	/*
+	 * Get all victim and their count corresponding to their type
+	 */
 	@RequestMapping(value = "/getAllTypesOfVictims", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody String getAllTypesOfAmbulance(ModelMap model) {
 		String jsonData = "Not A User";
 		System.out.println("inside");
 		ArrayList<VictimCount> mapOfAllVictimTypes = VictimDAO.getCountByType();
-				
 		ObjectMapper objmapper = new ObjectMapper();
 		try {
 			jsonData = objmapper.writeValueAsString(mapOfAllVictimTypes);

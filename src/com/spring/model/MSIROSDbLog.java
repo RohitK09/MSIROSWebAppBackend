@@ -1,5 +1,6 @@
 package com.spring.model;
 
+import java.sql.Date;
 import java.util.Calendar;
 
 import javax.persistence.Column;
@@ -8,105 +9,105 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
- 
+
 /**
- * Entity bean with JPA annotations
- * Hibernate provides JPA implementation
+ * Entity bean with JPA annotations Hibernate provides JPA implementation
+ * 
  * @author Rohit Katyal
  * @category Hibernate Entity Class
  */
-@Entity
-@Table(name="MSIROSDbLog")
+
 public class MSIROSDbLog {
- 
-    @Id
-    @Column(name="id")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int id;
-     
-    private String incidentid;
-    private String time; 
-    private String agency;
-    private String userid;
-    private String message;
- 
-    public int getId() {
-        return id;
-    }
- 
-    public void setId(int id) {
-        this.id = id;
-    }
- 
- 
-   
+
+	private String UserId;
+	private Date Dated;
+	private String LogLevel;
+	private String Message;
+	@Id
+	private int LogId;
+
 	/**
-	 * @return the incidentid
+	 * @return the userId
 	 */
-	public String getIncidentid() {
-		return incidentid;
+	public void setLog(String logLevel, String message) {
+		java.util.Calendar cal = java.util.Calendar.getInstance();
+		java.util.Date utilDate = cal.getTime();
+		java.sql.Date sqlDate = new Date(utilDate.getTime());
+		Dated = sqlDate;
+		LogLevel = logLevel;
+		Message = message;
+	}
+
+	public String getUserId() {
+		return UserId;
 	}
 
 	/**
-	 * @param incidentid the incidentid to set
+	 * @param userId
+	 *            the userId to set
 	 */
-	public void setIncidentid(String incidentid) {
-		this.incidentid = incidentid;
+	public void setUserId(String userId) {
+		UserId = userId;
 	}
 
 	/**
-	 * @return the time
+	 * @return the dated
 	 */
-	public String getTime() {
-		return time;
+	public Date getDated() {
+		return Dated;
 	}
 
 	/**
-	 * @param time the time to set
+	 * @param dated
+	 *            the dated to set
 	 */
-	public void setTime(String time) {
-		this.time = time;
+	public void setDated(Date dated) {
+		Dated = dated;
 	}
 
 	/**
-	 * @return the agency
+	 * @return the logLevel
 	 */
-	public String getAgency() {
-		return agency;
+	public String getLogLevel() {
+		return LogLevel;
 	}
 
 	/**
-	 * @param agency the agency to set
+	 * @param logLevel
+	 *            the logLevel to set
 	 */
-	public void setAgency(String agency) {
-		this.agency = agency;
-	}
-
-	/**
-	 * @return the userid
-	 */
-	public String getUserid() {
-		return userid;
-	}
-
-	/**
-	 * @param userid the userid to set
-	 */
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setLogLevel(String logLevel) {
+		LogLevel = logLevel;
 	}
 
 	/**
 	 * @return the message
 	 */
 	public String getMessage() {
-		return message;
+		return Message;
 	}
 
 	/**
-	 * @param message the message to set
+	 * @param message
+	 *            the message to set
 	 */
 	public void setMessage(String message) {
-		this.message = message;
+		Message = message;
 	}
+
+	/**
+	 * @return the logId
+	 */
+	public int getLogId() {
+		return LogId;
+	}
+
+	/**
+	 * @param logId
+	 *            the logId to set
+	 */
+	public void setLogId(int logId) {
+		LogId = logId;
+	}
+
 }

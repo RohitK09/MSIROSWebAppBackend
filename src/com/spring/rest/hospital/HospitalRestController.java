@@ -2,6 +2,7 @@ package com.spring.rest.hospital;
 
 import java.io.IOException;
 import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spring.dao.HospitalDAO;
+import com.spring.dao.MSIROSDbLogDAO;
 import com.spring.model.Hospital;
+import com.spring.model.MSIROSDbLog;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -32,8 +35,8 @@ import com.spring.model.Hospital;
 @RestController
 @RequestMapping("/Hospital")
 public class HospitalRestController {
-	final static Logger log = LoggerFactory
-			.getLogger(HospitalRestController.class);
+	@Autowired
+	private MSIROSDbLogDAO Log ;
 
 	/** The Json data. */
 	String JsonData;
@@ -63,7 +66,8 @@ public class HospitalRestController {
 
 			jsonData = objmapper.writeValueAsString(hospital);
 			// System.out.println(objmapper.writeValueAsString(hospital));
-
+			
+		
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -92,7 +96,20 @@ public class HospitalRestController {
 		Hospital hospital = HospitalDAO.getById(Id);
 		hospital.setNumberOfBeds(Integer.parseInt(numberOfBeds));
 		HospitalDAO.update(hospital);
-		log.info("Upadating Hospital Beds Update:numberOfBeds" + numberOfBeds);
+		
+			
+		return "Success";
+
+	}
+	@RequestMapping(value = "/countOfbeds", method = RequestMethod.GET)
+	public @ResponseBody String getCountOfBeds(ModelMap model,
+			@RequestParam("HospitalId") String Id,
+			@RequestParam("numberOfBeds") String numberOfBeds) {
+
+		System.out.println(Id);
+		Hospital hospital = HospitalDAO.getById(Id);
+		hospital.setNumberOfBeds(Integer.parseInt(numberOfBeds));
+		HospitalDAO.update(hospital);
 		return "Success";
 
 	}

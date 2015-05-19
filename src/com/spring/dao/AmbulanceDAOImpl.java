@@ -95,15 +95,16 @@ public class AmbulanceDAOImpl implements AmbulanceDAO {
 	@Override
 	public List<Ambulance> getAll() {
 		List<Ambulance> ambulanceList = new ArrayList<Ambulance>();
-		String sql = "SELECT * FROM ACTIVEAMBULANCES";
+		//String sql = "SELECT * FROM ACTIVEAMBULANCES";
+		String sql = "SELECT * From VICTIM_TRANSPORT_VEHICLE WHERE VEHICLE_LOCATION_STATUS='On Site'";
 		List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
 		for (Map row : rows) {
 			Ambulance ambulance = new Ambulance();
-			ambulance.setID((String) row.get("AMBULANCEID").toString());
-			ambulance.setAmbulanceType((String) row.get("AMBULANCETYPE"));
-			ambulance.setVehicleNumber((String) row.get("VEHICLENO"));
+			//ambulance.setID((String) row.get("VEHICLE_ID").toString());
+			ambulance.setAmbulanceType((String) row.get("TYPE"));
+			ambulance.setVehicleNumber((String) row.get("VEHICLE_ID").toString());
 			ambulance.setAmbulanceProviderName((String) row
-					.get("AMBULANCEPROVIDERNAME").toString().trim());
+					.get("AGENCY").toString().trim());
 			ambulanceList.add(ambulance);
 		}
 		return ambulanceList;
@@ -129,7 +130,10 @@ public class AmbulanceDAOImpl implements AmbulanceDAO {
 
 	@Override
 	public ArrayList<AmbulanceType> getCountOfAmbulances() {
-		String sql = "SELECT Count(*) AS AmbulanceCounts,AmbulanceType FROM Ambulance WHERE (IsAvailable=0) GROUP BY AmbulanceType";
+		/*
+		 * String sql = "SELECT Count(*) AS AmbulanceCounts,AmbulanceType FROM Ambulance WHERE (IsAvailable=0) GROUP BY AmbulanceType";
+		 */
+		String sql = "SELECT  COUNT(*) AmbulanceCounts,TYPE AmbulanceType  From VICTIM_TRANSPORT_VEHICLE WHERE VEHICLE_LOCATION_STATUS ='On Site' GROUP BY TYPE";
 		List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
 		ArrayList<AmbulanceType> mapOfType = new ArrayList<AmbulanceType>();
 		for (Map row : rows) {

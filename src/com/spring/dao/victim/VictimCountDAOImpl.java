@@ -53,14 +53,17 @@ public class VictimCountDAOImpl implements VictimCountDAO {
 
 	@Override
 	public ArrayList<VictimCount> getCountByType() {
-		String sql = "SELECT  COUNT(*) TotalCount, a.STATUS ,a.STATUSID FROM    STATUS a INNER JOIN VICTIMSTATUS b ON a.STATUSID = b.STATUSID GROUP   BY a.STATUSID, a.STATUS";
+		//old sql for UB AOS Query
+		//String sql = "SELECT  COUNT(*) TotalCount, a.STATUS ,a.STATUSID FROM    STATUS a INNER JOIN VICTIMSTATUS b ON a.STATUSID = b.STATUSID GROUP   BY a.STATUSID, a.STATUS";
+		//COUNT of Victims at Staging Location. 
+		String sql = "SELECT  COUNT(*) TotalCount,STATUS  From VICTIM  where IN_STAGING_AREA = 1 GROUP BY STATUS ";
 		List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
 		ArrayList<VictimCount> mapOfType = new ArrayList<VictimCount>();
 		for (Map row : rows) {
 			VictimCount victype = new VictimCount();
 			victype.setStatusDesc(row.get("STATUS").toString());
 			victype.setCount(Integer.parseInt(row.get("TotalCount").toString()));
-			victype.setStatusId(Integer.parseInt(row.get("STATUSID").toString()));
+			//victype.setStatusId(Integer.parseInt(row.get("STATUSID").toString()));
 			//victype.setDECISIONDATETIME(dECISIONDATETIME);
 			mapOfType.add(victype);
 			

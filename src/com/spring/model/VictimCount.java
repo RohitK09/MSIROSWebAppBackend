@@ -1,21 +1,10 @@
 package com.spring.model;
 
 public class VictimCount {
-	int StatusId;
+	
 	int Count;
 	String StatusDesc;
-	/**
-	 * @return the statusId
-	 */
-	public int getStatusId() {
-		return StatusId;
-	}
-	/**
-	 * @param statusId the statusId to set
-	 */
-	public void setStatusId(int statusId) {
-		StatusId = statusId;
-	}
+	
 	/**
 	 * @return the count
 	 */

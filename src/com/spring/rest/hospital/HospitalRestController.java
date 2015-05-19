@@ -8,7 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,7 +38,7 @@ import com.spring.model.MSIROSDbLog;
 @RequestMapping("/Hospital")
 public class HospitalRestController {
 	@Autowired
-	private MSIROSDbLogDAO Log ;
+	private MSIROSDbLogDAO Log;
 
 	/** The Json data. */
 	String JsonData;
@@ -56,24 +58,24 @@ public class HospitalRestController {
 	 */
 	@Cacheable
 	@RequestMapping(value = "/{hospitalId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody String getHospitalProviders(ModelMap model,
+	public ResponseEntity<String> getHospitalProviders(ModelMap model,
 			@PathVariable("hospitalId") String hospitalId) {
-
 		String jsonData = "Not A User";
-		Hospital hospital = HospitalDAO.getById(hospitalId);
-		ObjectMapper objmapper = new ObjectMapper();
 		try {
 
+			
+			Hospital hospital = HospitalDAO.getById(hospitalId);
+			ObjectMapper objmapper = new ObjectMapper();
 			jsonData = objmapper.writeValueAsString(hospital);
 			// System.out.println(objmapper.writeValueAsString(hospital));
+
+		} catch (Exception e) {
 			
-		
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 		}
 
-		return jsonData;
+		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 
 	/**
@@ -84,33 +86,41 @@ public class HospitalRestController {
 	 * @param Id
 	 *            the id
 	 * @param numberOfBeds
-	 *    the number of beds to update 
+	 *            the number of beds to update
 	 * @return the string
 	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public @ResponseBody String setHospitalProviders(ModelMap model,
+	public ResponseEntity<String> setHospitalProviders(ModelMap model,
 			@RequestParam("HospitalId") String Id,
 			@RequestParam("numberOfBeds") String numberOfBeds) {
 
 		System.out.println(Id);
-		Hospital hospital = HospitalDAO.getById(Id);
-		hospital.setNumberOfBeds(Integer.parseInt(numberOfBeds));
-		HospitalDAO.update(hospital);
-		
-			
-		return "Success";
+		try {
+			Hospital hospital = HospitalDAO.getById(Id);
+			hospital.setNumberOfBeds(Integer.parseInt(numberOfBeds));
+			HospitalDAO.update(hospital);
+		} catch (Exception e) {
+			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		}
+
+		return new ResponseEntity<String>(HttpStatus.OK);
 
 	}
+
 	@RequestMapping(value = "/countOfbeds", method = RequestMethod.GET)
-	public @ResponseBody String getCountOfBeds(ModelMap model,
+	public ResponseEntity<String> getCountOfBeds(ModelMap model,
 			@RequestParam("HospitalId") String Id,
 			@RequestParam("numberOfBeds") String numberOfBeds) {
+		try {
+			System.out.println(Id);
+			Hospital hospital = HospitalDAO.getById(Id);
+			hospital.setNumberOfBeds(Integer.parseInt(numberOfBeds));
+			HospitalDAO.update(hospital);
+			
 
-		System.out.println(Id);
-		Hospital hospital = HospitalDAO.getById(Id);
-		hospital.setNumberOfBeds(Integer.parseInt(numberOfBeds));
-		HospitalDAO.update(hospital);
-		return "Success";
-
+		} catch (Exception e) {
+			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 }

@@ -1,14 +1,8 @@
 package com.spring.model;
 
 import java.sql.Date;
-import java.util.Calendar;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import java.sql.Timestamp;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 /**
  * Entity bean with JPA annotations Hibernate provides JPA implementation
@@ -20,7 +14,7 @@ import javax.persistence.Table;
 public class MSIROSDbLog {
 
 	private String UserId;
-	private Date Dated;
+	private Timestamp Dated;
 	private String LogLevel;
 	private String Message;
 	@Id
@@ -33,7 +27,7 @@ public class MSIROSDbLog {
 		java.util.Calendar cal = java.util.Calendar.getInstance();
 		java.util.Date utilDate = cal.getTime();
 		java.sql.Date sqlDate = new Date(utilDate.getTime());
-		Dated = sqlDate;
+		Dated = new Timestamp(sqlDate.getTime());
 		LogLevel = logLevel;
 		Message = message;
 	}
@@ -53,7 +47,7 @@ public class MSIROSDbLog {
 	/**
 	 * @return the dated
 	 */
-	public Date getDated() {
+	public Timestamp getDated() {
 		return Dated;
 	}
 
@@ -61,7 +55,7 @@ public class MSIROSDbLog {
 	 * @param dated
 	 *            the dated to set
 	 */
-	public void setDated(Date dated) {
+	public void setDated(Timestamp dated) {
 		Dated = dated;
 	}
 

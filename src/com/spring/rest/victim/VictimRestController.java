@@ -51,8 +51,8 @@ public class VictimRestController {
 		ObjectMapper objmapper = new ObjectMapper();
 		try {
 			jsonData = objmapper.writeValueAsString(mapOfAllVictimTypes);
-			log.setLog("info", "Get Ambulance information" );
-			logDAO.save(log);
+			//log.setLog("info", "Get Ambulance information" );
+			//logDAO.save(log);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -18,11 +18,17 @@ http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 		<property name="suffix" value=".jsp" />
 	</bean>
 	
-	 <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	 <!--  bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
  		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
         <property name="url" value="jdbc:oracle:thin:@aos.acsu.buffalo.edu:1521/aos.buffalo.edu" />
         <property name="username" value="mehulraj" />
         <property name="password" value="mgs618f3s" />
+    </bean-->
+    <bean id="dataSource_aws" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+ 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+        <property name="url" value="jdbc:oracle:thin:@vicma.cl1jx14pxa9o.us-west-2.rds.amazonaws.com:1521/orcl" />
+        <property name="username" value="admin" />
+        <property name="password" value="password" />
     </bean>
      <bean id="ambulanceDAO" class="com.spring.dao.AmbulanceDAOImpl">
     </bean>
